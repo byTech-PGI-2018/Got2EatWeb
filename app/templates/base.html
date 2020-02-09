@@ -1,0 +1,27 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Got2Eat</title>
+      {% else %}
+      <title>Welcome to Got2Eat</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Got2Eat: 
+            <a href={{ url_for('index') }}>Home</a>
+            <a href={{ url_for('login') }}>Login</a>
+            <a href={{ url_for('logout') }}>Logout</a>
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>
