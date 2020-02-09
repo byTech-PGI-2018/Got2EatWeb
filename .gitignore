@@ -163,4 +163,4 @@ dmypy.json
 ###########
 
 #Config json's
-firebase_config.json
+*.json

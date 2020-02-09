@@ -1,9 +1,10 @@
 from flask import render_template, flash, redirect, url_for, session, request
 from flask_login import LoginManager, UserMixin, login_required, current_user, login_user
 from app import app
-from app.forms import LoginForm
+from app.forms import LoginForm, ChatForm
 from config import Config
 from app.models import User
+from app.dialogflow import Chat
 from werkzeug.urls import url_parse
 import pyrebase
 
@@ -11,8 +12,8 @@ import pyrebase
 
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     # Check if user is authenticated
     try:
@@ -21,8 +22,19 @@ def index():
         return redirect(url_for('login'))
     
     user = {'email': session['name']}
+
+    form = ChatForm()
+
+    if form.validate_on_submit():
+        # Make dialogflow request
+        response = Chat().send_message(form.text.data)
+
+        flash('Sent message: {}, received response {}'.format(
+            form.text.data, response
+        ))
+
     
-    return render_template('index.html', title='Home', user=user)
+    return render_template('index.html', title='Home', user=user, form=form)
 
 
 

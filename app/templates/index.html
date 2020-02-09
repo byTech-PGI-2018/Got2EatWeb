@@ -4,5 +4,13 @@
     <h1>Hi, {{ user.email }}!</h1>
     <div>
         <p>Content</p>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.text.label }}<br>
+                {{ form.text(size=32) }}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
     </div>
 {% endblock %}
