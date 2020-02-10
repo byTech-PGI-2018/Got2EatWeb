@@ -1,6 +1,6 @@
 <html>
     <head>
-      <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/login.css') }}>
+      <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/style.css') }}>
       {% if title %}
       <title>{{ title }} - Got2Eat</title>
       {% else %}
@@ -24,5 +24,11 @@
         {% endif %}
         {% endwith %}
         {% block content %}{% endblock %}
+
+        <!-- Load JQuery -->
+        <script type=text/javascript src={{ url_for('static', filename='js/jquery.js') }}></script>
+
+        <!-- Load Chat script. -->
+        <script type=text/javascript src={{ url_for('static', filename='js/chat.js') }}></script>
     </body>
 </html>
